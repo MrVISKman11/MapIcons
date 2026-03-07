@@ -675,11 +675,17 @@ public sealed class IconBuilder
         return icon;
     }
     private MapIcon CreateNPCIcon(Entity entity) {
+        if (entity.Path.Contains("Breach", StringComparison.OrdinalIgnoreCase) && 
+           (entity.Rarity == MonsterRarity.White || entity.Rarity == MonsterRarity.Magic || entity.Rarity == MonsterRarity.Rare || entity.Rarity == MonsterRarity.Error)) {
+            return null;
+        }
+
         var icon = new MapIcon(entity);
         icon.IconRenderType = IconRenderTypes.Monster;
         icon.IconCategory = IconCategories.NPC;
         icon.Text = icon.RenderName;
-        icon.Show = () => entity.IsAlive;
+        // Despawned monsters that don't die (Breach/Ultimatum ends) often retain HP but become untargetable
+        icon.Show = () => entity.IsAlive && (!entity.HasComponent<Targetable>() || entity.IsTargetable);
         
         // NPC
         if (entity.Type == EntityType.Npc) {
@@ -687,7 +693,7 @@ public sealed class IconBuilder
             var component = entity.GetComponent<Render>();
             icon.IconType = IconTypes.NPC;
             icon.Text = component?.Name.Split(',')[0];
-            icon.Show = () => entity.IsValid;
+            icon.Show = () => entity.IsValid && (!entity.HasComponent<Targetable>() || entity.IsTargetable);
             icon.UpdateSettingsAction = () => {
                 icon.Draw = Settings.NPC_Draw;
                 icon.DrawText = Settings.NPC_DrawText;
@@ -864,13 +870,15 @@ public sealed class IconBuilder
         var transitionableFlag1 = 1;
         var shrineIsAvailable = true;
         var isOpened = false;
+        var isTargetable = true;
 
         T Update<T>(ref T store, Func<T> update) { return entity.IsValid ? store = update() : store; }
 
         icon.Show = () => !Update(ref isHidden, () => entity.GetComponent<MinimapIcon>()?.IsHide ?? isHidden) &&
                            Update(ref transitionableFlag1, () => entity.GetComponent<Transitionable>()?.Flag1 ?? 1) == 1 &&
                            Update(ref shrineIsAvailable, () => entity.GetComponent<Shrine>()?.IsAvailable ?? shrineIsAvailable) &&
-                          !Update(ref isOpened, () => entity.GetComponent<Chest>()?.IsOpened ?? isOpened);
+                          !Update(ref isOpened, () => entity.GetComponent<Chest>()?.IsOpened ?? isOpened) &&
+                           Update(ref isTargetable, () => !entity.HasComponent<Targetable>() || entity.IsTargetable);
 
         var iconSizeMultiplier = RemoteMemoryObject.pTheGame.Files.MinimapIcons.EntriesList.ElementAtOrDefault((int)iconIndexByName)?.LargeMinimapSize ?? 1;
         icon.InGameTexture.Size = RemoteMemoryObject.pTheGame.IngameState.IngameUi.Map.LargeMapZoom * RemoteMemoryObject.pTheGame.IngameState.Camera.Height * iconSizeMultiplier / 64;

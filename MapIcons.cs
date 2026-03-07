@@ -1306,8 +1306,18 @@ public class MapIcons : BaseSettingsPlugin<MapIconsSettings>
             var entitySource = Settings.DrawCachedEntities
                 ? GameController?.EntityListWrapper.Entities
                 : GameController?.EntityListWrapper?.OnlyValidEntities;
+            
+            var playerPos = GameController?.Player?.GetComponent<Render>()?.PosNum.WorldToGrid() ?? Vector2.Zero;
+            var maxDistanceSqr = 20000f; // Roughly offscreen + some padding to cull truly lost/stuck cached entities
+
             var baseIcons = entitySource?.Select(x => x.GetHudComponent<MapIcon>())
-                .Where(icon => icon != null)
+                .Where(icon => icon != null && icon.Entity != null)
+                .Where(icon => {
+                    // Always show valid entities
+                    if (icon.Entity.IsValid) return true;
+                    // For invalid (cached/despawned) entities, cull them if they are too far away
+                    return Vector2.DistanceSquared(playerPos, icon.GridPosition()) < maxDistanceSqr;
+                })
                 .OrderBy(x => x.Priority)
                 .ToList();
             return baseIcons ?? [];
