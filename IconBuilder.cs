@@ -1,4 +1,4 @@
-﻿using ExileCore.PoEMemory.MemoryObjects;
+using ExileCore.PoEMemory.MemoryObjects;
 using ExileCore.PoEMemory.Components;
 using ExileCore.PoEMemory;
 using ExileCore.Shared.Enums;
@@ -839,7 +839,7 @@ public sealed class IconBuilder
             //Converts on death
             if (entity.HasComponent<ObjectMagicProperties>()) {
                 var objectMagicProperties = entity.GetComponent<ObjectMagicProperties>();
-                var mods = objectMagicProperties.Mods;
+                var mods = objectMagicProperties?.Mods;
                 if (mods != null) {
                     if (mods.Contains("MonsterConvertsOnDeath_")) icon.Show = () => entity.IsAlive && entity.IsHostile;
                 }
@@ -856,7 +856,7 @@ public sealed class IconBuilder
         icon.Text = icon.RenderName;
 
         var minimapIconComponent = entity.GetComponent<MinimapIcon>();
-        if (minimapIconComponent.IsHide) return null;
+        if (minimapIconComponent == null || minimapIconComponent.IsHide) return null;
 
         var minimapIconName = minimapIconComponent.Name;
         if (string.IsNullOrEmpty(minimapIconName)) return null;
