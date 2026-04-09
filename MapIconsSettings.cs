@@ -291,7 +291,7 @@ public sealed class MapIconsSettings : ISettings {
         public int SanctumChest_Index = 241;
         public Vector4 SanctumChest_Tint = new(1.0f, 0.0f, 0.0f, 1.0f);
 
-        // delve chests
+        // Delve Chests Generic
         public bool DelveChestGeneric_Draw = true;
         public bool DelveChestGeneric_DrawText = false;
         public int DelveChestGeneric_Size = 32;
@@ -329,45 +329,44 @@ public sealed class MapIconsSettings : ISettings {
         public Vector4 DelveResonator_Trove_Tint = new(1.0f, 0.5f, 0.0f, 1.0f);
 
         // Fossils
-        public bool DelveChestFossil_Draw = true;
+        public bool DelveFossil_Aberrant_Draw = true;
+        public bool DelveFossil_Aetheric_Draw = true;
+        public bool DelveFossil_Bloodstained_Draw = true;
+        public bool DelveFossil_Bound_Draw = true;
+        public bool DelveFossil_Corroded_Draw = true;
+        public bool DelveFossil_Dense_Draw = true;
+        public bool DelveFossil_Enchanted_Draw = true;
+        public bool DelveFossil_Encrusted_Draw = true;
+        public bool DelveFossil_Faceted_Draw = true;
+        public bool DelveFossil_Fractured_Draw = true;
+        public bool DelveFossil_Frigid_Draw = true;
+        public bool DelveFossil_Gilded_Draw = true;
+        public bool DelveFossil_Glyphic_Draw = true;
+        public bool DelveFossil_Hollow_Draw = true;
+        public bool DelveFossil_Jagged_Draw = true;
+        public bool DelveFossil_Lucent_Draw = true;
+        public bool DelveFossil_Metallic_Draw = true;
+        public bool DelveFossil_Perfect_Draw = true;
+        public bool DelveFossil_Prismatic_Draw = true;
+        public bool DelveFossil_Pristine_Draw = true;
+        public bool DelveFossil_Sanctified_Draw = true;
+        public bool DelveFossil_Scorched_Draw = true;
+        public bool DelveFossil_Serrated_Draw = true;
+        public bool DelveFossil_Shuddering_Draw = true;
+        public bool DelveFossil_Tangled_Draw = true;
+        public bool DelveFossil_Generic_Draw = true;
+
         public bool DelveChestFossil_DrawText = false;
         public int DelveChestFossil_Size = 32;
         public int DelveChestFossil_Index = 241;
         public Vector4 DelveChestFossil_Tint = new(1.0f, 0.8235294f, 0.0f, 1.0f);
 
-        // Main Path
-        public bool DelvePath_Loot_Draw = true;
-        public bool DelvePath_Armour_Draw = true;
-        public bool DelvePath_Armaments_Draw = true;
-        public bool DelvePath_Jewellery_Draw = true;
-        public bool DelvePath_Wealth_Draw = true;
-        
-        // Side Paths
-        public bool DelveOffPath_Loot_Draw = true;
-        public bool DelveOffPath_Armour_Draw = true;
-        public bool DelveOffPath_Armaments_Draw = true;
-        public bool DelveOffPath_Jewellery_Draw = true;
-        public bool DelveOffPath_Wealth_Draw = true;
-
-        // Behind Fractured Walls
-        public bool DelveDynamite_Loot_Draw = true;
-        public bool DelveDynamite_Armour_Draw = true;
-        public bool DelveDynamite_Armaments_Draw = true;
-        public bool DelveDynamite_Jewellery_Draw = true;
-        public bool DelveDynamite_Wealth_Draw = true;
-        public bool DelveDynamite_Riches_Draw = true;
+        // Unified Route/Dynamite Settings (Opulence is kept separate)
         public bool DelveDynamite_Opulence_Draw = true;
-
         public bool DelveDynamite_Opulence_DrawText = false;
         public int DelveDynamite_Opulence_Size = 32;
         public int DelveDynamite_Opulence_Index = 241;
         public Vector4 DelveDynamite_Opulence_Tint = new(1.0f, 0.8235294f, 0.0f, 1.0f);
-
-        // Unified path/offpath/dynamite settings
-        public bool DelveRoute_DrawText = false;
-        public int DelveRoute_Size = 32;
-        public int DelveRoute_Index = 241;
-        public Vector4 DelveRoute_Tint = new(1.0f, 0.8235294f, 0.0f, 1.0f);
 
         // Supplies
         public bool DelveSupplies_Flare_Draw = true;
@@ -379,203 +378,65 @@ public sealed class MapIconsSettings : ISettings {
         public int DelveSupplies_Index = 241;
         public Vector4 DelveSupplies_Tint = new(1.0f, 1.0f, 1.0f, 1.0f);
 
-        // Generic Chests
-        public bool DelveGeneric_Sealed_Draw = true; // Sealed Lockbox
-        public bool DelveGeneric_HiddenTreasures_Draw = true; // Hidden Treasures
-        public bool DelveGeneric_Murmuring_Draw = true; // Murmuring Lockbox
-        public bool DelveGeneric_Bloodstained_Draw = true; // Bloodstained Lockbox
-        public bool DelveGeneric_Opulent_Draw = true; // Opulent Lockbox
-        public bool DelveGeneric_Encrusted_Draw = true; // Encrusted Lockbox
-        public bool DelveGeneric_Light_Draw = true; // Light Lockbox
-        public bool DelveGeneric_Enchanted_Draw = true; // Enchanted Lockbox
-        public bool DelveGeneric_Eldritch_Draw = true; // Eldritch Lockbox
-        public bool DelveGeneric_Astral_Draw = true; // Astral Lockbox
-        public bool DelveGeneric_Clean_Draw = true; // Clean Lockbox
-        public bool DelveGeneric_Offering_Draw = true; // Offering to the Goddess
-        public bool DelveGeneric_Treasured_Draw = true; // Treasured Lockbox
-        public bool DelveGeneric_HiddenHeirlooms_Draw = true; // Hidden Heirlooms
-        public bool DelveGeneric_Shadowstitch_Draw = true; // Shadowstitch
+        // Unified Categories (Suffixes)
+        // Group: Equipment
+        public bool Delve_Armour_Draw = true;
+        public bool Delve_Armaments_Draw = true;
+        public bool Delve_Jewellery_Draw = true;
+        public bool Delve_Amulets_Draw = true;
+        public bool Delve_Rings_Draw = true;
+        public bool Delve_Jewels_Draw = true;
+        public bool Delve_Talismans_Draw = true;
 
-        // Armour Nodes
-        public bool DelveArmour_Abandoned_Draw = true; // Abandoned Armour
-        public bool DelveArmour_Twisted_Draw = true; // Twisted Armour
-        public bool DelveArmour_Traveller_Draw = true; // Traveller's Armour
-        public bool DelveArmour_Vital_Draw = true; // Vital Armour
-        public bool DelveArmour_Pocked_Draw = true; // Pocked Armour
-        public bool DelveArmour_Resistant_Draw = true; // Resistant Armour
-        public bool DelveArmour_Unusual_Draw = true; // Unusual Armour
-        public bool DelveArmour_Superior_Draw = true; // Superior Armour
-        public bool DelveArmour_Astral_Draw = true; // Astral Armour
-        public bool DelveArmour_Eldritch_Draw = true; // Eldritch Armour
-        public bool DelveArmour_Triumphant_Draw = true; // Triumphant Armour
-        public bool DelveArmour_Intricate_Draw = true; // Intricate Armour
-        public bool DelveArmour_Flexible_Draw = true; // Flexible Armour
-        public bool DelveArmour_Exceptional_Draw = true; // Exceptional Armour
-        public bool DelveArmour_Shattered_Draw = true; // Shattered Armour
-        public bool DelveArmour_Amalgamated_Draw = true; // Amalgamated Armour
-        
-        public bool DelveArmour_DrawText = false;
-        public int DelveArmour_Size = 32;
-        public int DelveArmour_Index = 241;
-        public Vector4 DelveArmour_Tint = new(1.0f, 1.0f, 1.0f, 1.0f);
+        public bool DelveEquipment_DrawText = false;
+        public int DelveEquipment_Size = 32;
+        public int DelveEquipment_Index = 241;
+        public Vector4 DelveEquipment_Tint = new(1.0f, 1.0f, 1.0f, 1.0f);
 
-        // Weapon Nodes
-        public bool DelveWeapon_Abandoned_Draw = true; // Abandoned Armaments
-        public bool DelveWeapon_Twisted_Draw = true; // Twisted Armaments
-        public bool DelveWeapon_Heavy_Draw = true; // Heavy Armaments
-        public bool DelveWeapon_Runed_Draw = true; // Runed Armaments
-        public bool DelveWeapon_Light_Draw = true; // Light Armaments
-        public bool DelveWeapon_Superior_Draw = true; // Superior Armaments
-        public bool DelveWeapon_Astral_Draw = true; // Astral Armaments
-        public bool DelveWeapon_Eldritch_Draw = true; // Eldritch Armaments
-        public bool DelveWeapon_Triumphant_Draw = true; // Triumphant Armaments
-        public bool DelveWeapon_Honed_Draw = true; // Honed Armaments
-        public bool DelveWeapon_Hexed_Draw = true; // Hexed Armaments
-        public bool DelveWeapon_Exceptional_Draw = true; // Exceptional Armaments
-        public bool DelveWeapon_Masterwork_Draw = true; // Masterwork Armaments
-        public bool DelveWeapon_Shattered_Draw = true; // Shattered Armaments
-        public bool DelveWeapon_Amalgamated_Draw = true; // Amalgamated Armaments
+        // Group: Gems
+        public bool Delve_Gems_Draw = true;
 
-        public bool DelveWeapon_DrawText = false;
-        public int DelveWeapon_Size = 32;
-        public int DelveWeapon_Index = 241;
-        public Vector4 DelveWeapon_Tint = new(1.0f, 1.0f, 1.0f, 1.0f);
-
-        // Jewellery Nodes
-        public bool DelveJewelry_AbandonedJewellery_Draw = true;
-        public bool DelveJewelry_AbandonedAmulets_Draw = true;
-        public bool DelveJewelry_AbandonedRings_Draw = true;
-        public bool DelveJewelry_AbandonedJewels_Draw = true;
-        public bool DelveJewelry_TwistedJewellery_Draw = true;
-        public bool DelveJewelry_Flexible_Draw = true;
-        public bool DelveJewelry_Light_Draw = true;
-        public bool DelveJewelry_Astral_Draw = true;
-        public bool DelveJewelry_Eldritch_Draw = true;
-        public bool DelveJewelry_Triumphant_Draw = true;
-        public bool DelveJewelry_Unusual_Draw = true;
-        public bool DelveJewelry_Ritualistic_Draw = true;
-        public bool DelveJewelry_Superior_Draw = true;
-        public bool DelveJewelry_Shattered_Draw = true;
-        public bool DelveJewelry_Amalgamated_Draw = true;
-        public bool DelveJewelry_TwistedJewels_Draw = true;
-        public bool DelveJewelry_Compacted_Draw = true;
-
-        public bool DelveJewelry_DrawText = false;
-        public int DelveJewelry_Size = 32;
-        public int DelveJewelry_Index = 241;
-        public Vector4 DelveJewelry_Tint = new(1.0f, 1.0f, 1.0f, 1.0f);
-
-        // Gem Nodes
-        public bool DelveGem_Abandoned_Draw = true;
-        public bool DelveGem_Gemcutters_Draw = true;
-        public bool DelveGem_Superior_Draw = true;
-        public bool DelveGem_Ancient_Draw = true;
-        public bool DelveGem_Inscribed_Draw = true;
-        public bool DelveGem_Exceptional_Draw = true;
-        
         public bool DelveGem_DrawText = false;
         public int DelveGem_Size = 32;
         public int DelveGem_Index = 241;
         public Vector4 DelveGem_Tint = new(0.0f, 1.0f, 0.5f, 1.0f);
 
-        // Currency Nodes
-        public bool DelveCurrency_AbandonedRiches_Draw = true;
-        public bool DelveCurrency_Pocked_Draw = true;
-        public bool DelveCurrency_Bloodstained_Draw = true;
-        public bool DelveCurrency_Light_Draw = true;
-        public bool DelveCurrency_Glimmering_Draw = true;
-        public bool DelveCurrency_Packed_Draw = true;
-        public bool DelveCurrency_Cartographers_Draw = true;
-        public bool DelveCurrency_Shattered_Draw = true;
-        public bool DelveCurrency_AbandonedFortune_Draw = true;
-        
-        public bool DelveCurrency_DrawText = false;
-        public int DelveCurrency_Size = 32;
-        public int DelveCurrency_Index = 241;
-        public Vector4 DelveCurrency_Tint = new(1.0f, 0.8235294f, 0.0f, 1.0f);
+        // Group: Wealth/Currency
+        public bool Delve_Loot_Draw = true;
+        public bool Delve_Treasures_Draw = true;
+        public bool Delve_Wealth_Draw = true;
+        public bool Delve_Riches_Draw = true;
+        public bool Delve_Fortune_Draw = true;
 
-        // Map Nodes
-        public bool DelveMap_Abandoned_Draw = true;
-        public bool DelveMap_Cartographers_Draw = true;
-        public bool DelveMap_Bloodstained_Draw = true;
-        public bool DelveMap_Strange_Draw = true;
-        public bool DelveMap_Explorers_Draw = true;
-        public bool DelveMap_Beautiful_Draw = true;
-        public bool DelveMap_Puzzling_Draw = true;
-        public bool DelveMap_Maddening_Draw = true;
-        public bool DelveMap_Remembered_Draw = true;
-        
+        public bool DelveWealth_DrawText = false;
+        public int DelveWealth_Size = 32;
+        public int DelveWealth_Index = 241;
+        public Vector4 DelveWealth_Tint = new(1.0f, 0.8235294f, 0.0f, 1.0f);
+
+        // Group: Map/Charts
+        public bool Delve_Charts_Draw = true;
+
         public bool DelveMap_DrawText = false;
         public int DelveMap_Size = 32;
         public int DelveMap_Index = 241;
         public Vector4 DelveMap_Tint = new(1.0f, 1.0f, 1.0f, 1.0f);
 
-        // Special Nodes
-        public bool DelveSpecial_GrimArmour_Draw = true;
-        public bool DelveSpecial_GrimJewellery_Draw = true;
-        public bool DelveSpecial_GrimLoot_Draw = true;
-        public bool DelveSpecial_GrimTreasures_Draw = true;
-        public bool DelveSpecial_HeavyArmour_Draw = true;
-        public bool DelveSpecial_HeavyJewellery_Draw = true;
-        public bool DelveSpecial_HeavyLoot_Draw = true;
-        public bool DelveSpecial_HeavyTreasures_Draw = true;
-        public bool DelveSpecial_SmoulderingArmour_Draw = true;
-        public bool DelveSpecial_SmoulderingArmaments_Draw = true;
-        public bool DelveSpecial_SmoulderingJewellery_Draw = true;
-        public bool DelveSpecial_SmoulderingLoot_Draw = true;
-        public bool DelveSpecial_SmoulderingTreasures_Draw = true;
-        public bool DelveSpecial_FrostyArmour_Draw = true;
-        public bool DelveSpecial_FrostyArmaments_Draw = true;
-        public bool DelveSpecial_FrostyJewellery_Draw = true;
-        public bool DelveSpecial_FrostyLoot_Draw = true;
-        public bool DelveSpecial_FrostyTreasures_Draw = true;
-        public bool DelveSpecial_ChargedArmour_Draw = true;
-        public bool DelveSpecial_ChargedArmaments_Draw = true;
-        public bool DelveSpecial_ChargedJewellery_Draw = true;
-        public bool DelveSpecial_ChargedLoot_Draw = true;
-        public bool DelveSpecial_ChargedTreasures_Draw = true;
-        public bool DelveSpecial_MalignantArmour_Draw = true;
-        public bool DelveSpecial_MalignantArmaments_Draw = true;
-        public bool DelveSpecial_MalignantJewellery_Draw = true;
-        public bool DelveSpecial_MalignantLoot_Draw = true;
-        public bool DelveSpecial_MalignantTreasures_Draw = true;
-        public bool DelveSpecial_FeralTalismans_Draw = true;
-        public bool DelveSpecial_FeralArmour_Draw = true;
-        public bool DelveSpecial_FeralJewellery_Draw = true;
-        public bool DelveSpecial_WhisperingCoffer_Draw = true;
-        public bool DelveSpecial_InspiringArmour_Draw = true;
-        public bool DelveSpecial_InspiringJewellery_Draw = true;
-        public bool DelveSpecial_InspiringLoot_Draw = true;
-        public bool DelveSpecial_InspiringTreasures_Draw = true;
-        public bool DelveSpecial_GazingJewellery_Draw = true;
-        public bool DelveSpecial_PrehistoricRiches_Draw = true;
-        
-        public bool DelveSpecial_DrawText = false;
-        public int DelveSpecial_Size = 32;
-        public int DelveSpecial_Index = 241;
-        public Vector4 DelveSpecial_Tint = new(1.0f, 0.0f, 1.0f, 1.0f);
+        // Group: Containers (Coffer, Lockbox, Crate, etc)
+        public bool Delve_Lockbox_Draw = true;
+        public bool Delve_Coffer_Draw = true;
+        public bool Delve_Crate_Draw = true;
+        public bool Delve_Antiques_Draw = true;
+        public bool Delve_Oddities_Draw = true;
+        public bool Delve_Adornments_Draw = true;
+        public bool Delve_Heirlooms_Draw = true;
+        public bool Delve_Shadowstitch_Draw = true;
+        public bool Delve_Offering_Draw = true;
+        public bool Delve_Ore_Draw = true;
 
-        // City Biomes
-        public bool DelveCity_BloodstainedLoot_Draw = true;
-        public bool DelveCity_HandcraftedAntiques_Draw = true;
-        public bool DelveCity_MythicalCrate_Draw = true;
-        public bool DelveCity_DisturbingLoot_Draw = true;
-        public bool DelveCity_RattlingCoffer_Draw = true;
-        public bool DelveCity_AbyssalJewellery_Draw = true;
-        public bool DelveCity_AbyssalTreasures_Draw = true;
-        public bool DelveCity_PrehistoricOre_Draw = true;
-        public bool DelveCity_PrehistoricFossils_Draw = true;
-        public bool DelveCity_PrehistoricResonators_Draw = true;
-        public bool DelveCity_PrehistoricRings_Draw = true;
-        public bool DelveCity_PrehistoricJewels_Draw = true;
-        public bool DelveCity_ConcealedOpulence_Draw = true;
-        public bool DelveCity_ConcealedOddities_Draw = true;
-        public bool DelveCity_ConcealedAdornments_Draw = true;
-        
-        public bool DelveCity_DrawText = false;
-        public int DelveCity_Size = 32;
-        public int DelveCity_Index = 241;
-        public Vector4 DelveCity_Tint = new(0.5f, 0.0f, 1.0f, 1.0f);
+        public bool DelveContainers_DrawText = false;
+        public int DelveContainers_Size = 32;
+        public int DelveContainers_Index = 241;
+        public Vector4 DelveContainers_Tint = new(0.5f, 0.0f, 1.0f, 1.0f);
 
     #endregion
 

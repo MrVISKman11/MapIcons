@@ -209,7 +209,38 @@ public sealed class IconBuilder
                 else if (path.Contains("Fossil", StringComparison.OrdinalIgnoreCase)) {
                     icon.IconType = IconTypes.DelveChestFossil;
                     icon.UpdateSettingsAction = () => {
-                        icon.Draw = Settings.DelveChestFossil_Draw;
+                        string n = icon.RenderName ?? "";
+                        bool shouldDraw = Settings.DelveFossil_Generic_Draw; // Fallback
+                        
+                        // Check individual fossil toggles
+                        if (n.Contains("Aberrant")) shouldDraw = Settings.DelveFossil_Aberrant_Draw;
+                        else if (n.Contains("Aetheric")) shouldDraw = Settings.DelveFossil_Aetheric_Draw;
+                        else if (n.Contains("Bloodstained")) shouldDraw = Settings.DelveFossil_Bloodstained_Draw;
+                        else if (n.Contains("Bound")) shouldDraw = Settings.DelveFossil_Bound_Draw;
+                        else if (n.Contains("Corroded")) shouldDraw = Settings.DelveFossil_Corroded_Draw;
+                        else if (n.Contains("Dense")) shouldDraw = Settings.DelveFossil_Dense_Draw;
+                        else if (n.Contains("Enchanted")) shouldDraw = Settings.DelveFossil_Enchanted_Draw;
+                        else if (n.Contains("Encrusted")) shouldDraw = Settings.DelveFossil_Encrusted_Draw;
+                        else if (n.Contains("Faceted")) shouldDraw = Settings.DelveFossil_Faceted_Draw;
+                        else if (n.Contains("Fractured")) shouldDraw = Settings.DelveFossil_Fractured_Draw;
+                        else if (n.Contains("Frigid")) shouldDraw = Settings.DelveFossil_Frigid_Draw;
+                        else if (n.Contains("Gilded")) shouldDraw = Settings.DelveFossil_Gilded_Draw;
+                        else if (n.Contains("Glyphic")) shouldDraw = Settings.DelveFossil_Glyphic_Draw;
+                        else if (n.Contains("Hollow")) shouldDraw = Settings.DelveFossil_Hollow_Draw;
+                        else if (n.Contains("Jagged")) shouldDraw = Settings.DelveFossil_Jagged_Draw;
+                        else if (n.Contains("Lucent")) shouldDraw = Settings.DelveFossil_Lucent_Draw;
+                        else if (n.Contains("Metallic")) shouldDraw = Settings.DelveFossil_Metallic_Draw;
+                        else if (n.Contains("Perfect")) shouldDraw = Settings.DelveFossil_Perfect_Draw;
+                        else if (n.Contains("Prismatic")) shouldDraw = Settings.DelveFossil_Prismatic_Draw;
+                        else if (n.Contains("Pristine")) shouldDraw = Settings.DelveFossil_Pristine_Draw;
+                        else if (n.Contains("Sanctified")) shouldDraw = Settings.DelveFossil_Sanctified_Draw;
+                        else if (n.Contains("Scorched")) shouldDraw = Settings.DelveFossil_Scorched_Draw;
+                        else if (n.Contains("Serrated")) shouldDraw = Settings.DelveFossil_Serrated_Draw;
+                        else if (n.Contains("Shuddering")) shouldDraw = Settings.DelveFossil_Shuddering_Draw;
+                        else if (n.Contains("Tangled")) shouldDraw = Settings.DelveFossil_Tangled_Draw;
+                        else shouldDraw = Settings.DelveFossil_Generic_Draw; // Generic catch-all
+
+                        icon.Draw = shouldDraw;
                         icon.DrawText = Settings.DelveChestFossil_DrawText;
                         icon.Size = Settings.DelveChestFossil_Size;
                         icon.Index = Settings.DelveChestFossil_Index;
@@ -267,184 +298,93 @@ public sealed class IconBuilder
                         var index = Settings.DelveChestGeneric_Index;
                         bool drawText = Settings.DelveChestGeneric_DrawText;
 
-                        // Check legacy routes first dynamically just in case name matching fails
-                        bool isDynamite = path.Contains("Dynamite", StringComparison.OrdinalIgnoreCase);
-                        bool isOffPath = path.Contains("OffPath", StringComparison.OrdinalIgnoreCase);
-                        if (n == "Forgotten Loot") { shouldDraw = Settings.DelvePath_Loot_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Forgotten Armour") { shouldDraw = Settings.DelvePath_Armour_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Forgotten Armaments") { shouldDraw = Settings.DelvePath_Armaments_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Forgotten Jewellery") { shouldDraw = Settings.DelvePath_Jewellery_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Forgotten Wealth") { shouldDraw = Settings.DelvePath_Wealth_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Lost Loot") { shouldDraw = Settings.DelveOffPath_Loot_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Lost Armour") { shouldDraw = Settings.DelveOffPath_Armour_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Lost Armaments") { shouldDraw = Settings.DelveOffPath_Armaments_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Lost Jewellery") { shouldDraw = Settings.DelveOffPath_Jewellery_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Lost Wealth") { shouldDraw = Settings.DelveOffPath_Wealth_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Hidden Loot") { shouldDraw = Settings.DelveDynamite_Loot_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Hidden Armour") { shouldDraw = Settings.DelveDynamite_Armour_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Hidden Armaments") { shouldDraw = Settings.DelveDynamite_Armaments_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Hidden Jewellery") { shouldDraw = Settings.DelveDynamite_Jewellery_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Hidden Wealth") { shouldDraw = Settings.DelveDynamite_Wealth_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Hidden Riches") { shouldDraw = Settings.DelveDynamite_Riches_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Hidden Opulence") { shouldDraw = Settings.DelveDynamite_Opulence_Draw; tint = Settings.DelveDynamite_Opulence_Tint; size = Settings.DelveDynamite_Opulence_Size; index = Settings.DelveDynamite_Opulence_Index; drawText = Settings.DelveDynamite_Opulence_DrawText; }
-
-                        // Generic
-                        else if (n == "Sealed Lockbox") shouldDraw = Settings.DelveGeneric_Sealed_Draw;
-                        else if (n == "Hidden Treasures") shouldDraw = Settings.DelveGeneric_HiddenTreasures_Draw;
-                        else if (n == "Murmuring Lockbox") shouldDraw = Settings.DelveGeneric_Murmuring_Draw;
-                        else if (n == "Bloodstained Lockbox") shouldDraw = Settings.DelveGeneric_Bloodstained_Draw;
-                        else if (n == "Opulent Lockbox") shouldDraw = Settings.DelveGeneric_Opulent_Draw;
-                        else if (n == "Encrusted Lockbox") shouldDraw = Settings.DelveGeneric_Encrusted_Draw;
-                        else if (n == "Light Lockbox") shouldDraw = Settings.DelveGeneric_Light_Draw;
-                        else if (n == "Enchanted Lockbox") shouldDraw = Settings.DelveGeneric_Enchanted_Draw;
-                        else if (n == "Eldritch Lockbox") shouldDraw = Settings.DelveGeneric_Eldritch_Draw;
-                        else if (n == "Astral Lockbox") shouldDraw = Settings.DelveGeneric_Astral_Draw;
-                        else if (n == "Clean Lockbox") shouldDraw = Settings.DelveGeneric_Clean_Draw;
-                        else if (n == "Offering to the Goddess") shouldDraw = Settings.DelveGeneric_Offering_Draw;
-                        else if (n == "Treasured Lockbox") shouldDraw = Settings.DelveGeneric_Treasured_Draw;
-                        else if (n == "Hidden Heirlooms") shouldDraw = Settings.DelveGeneric_HiddenHeirlooms_Draw;
-                        else if (n == "Shadowstitch") shouldDraw = Settings.DelveGeneric_Shadowstitch_Draw;
-
-                        // Armour
-                        else if (n == "Abandoned Armour") { shouldDraw = Settings.DelveArmour_Abandoned_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Twisted Armour") { shouldDraw = Settings.DelveArmour_Twisted_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Traveller's Armour") { shouldDraw = Settings.DelveArmour_Traveller_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Vital Armour") { shouldDraw = Settings.DelveArmour_Vital_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Pocked Armour") { shouldDraw = Settings.DelveArmour_Pocked_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Resistant Armour") { shouldDraw = Settings.DelveArmour_Resistant_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Unusual Armour") { shouldDraw = Settings.DelveArmour_Unusual_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Superior Armour") { shouldDraw = Settings.DelveArmour_Superior_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Astral Armour") { shouldDraw = Settings.DelveArmour_Astral_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Eldritch Armour") { shouldDraw = Settings.DelveArmour_Eldritch_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Triumphant Armour") { shouldDraw = Settings.DelveArmour_Triumphant_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Intricate Armour") { shouldDraw = Settings.DelveArmour_Intricate_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Flexible Armour") { shouldDraw = Settings.DelveArmour_Flexible_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Exceptional Armour") { shouldDraw = Settings.DelveArmour_Exceptional_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Shattered Armour") { shouldDraw = Settings.DelveArmour_Shattered_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-                        else if (n == "Amalgamated Armour") { shouldDraw = Settings.DelveArmour_Amalgamated_Draw; tint = Settings.DelveArmour_Tint; size = Settings.DelveArmour_Size; index = Settings.DelveArmour_Index; drawText = Settings.DelveArmour_DrawText; }
-
-                        // Weapons
-                        else if (n == "Abandoned Armaments") { shouldDraw = Settings.DelveWeapon_Abandoned_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Twisted Armaments") { shouldDraw = Settings.DelveWeapon_Twisted_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Heavy Armaments") { shouldDraw = Settings.DelveWeapon_Heavy_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Runed Armaments") { shouldDraw = Settings.DelveWeapon_Runed_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Light Armaments") { shouldDraw = Settings.DelveWeapon_Light_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Superior Armaments") { shouldDraw = Settings.DelveWeapon_Superior_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Astral Armaments") { shouldDraw = Settings.DelveWeapon_Astral_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Eldritch Armaments") { shouldDraw = Settings.DelveWeapon_Eldritch_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Triumphant Armaments") { shouldDraw = Settings.DelveWeapon_Triumphant_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Honed Armaments") { shouldDraw = Settings.DelveWeapon_Honed_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Hexed Armaments") { shouldDraw = Settings.DelveWeapon_Hexed_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Exceptional Armaments") { shouldDraw = Settings.DelveWeapon_Exceptional_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Masterwork Armaments") { shouldDraw = Settings.DelveWeapon_Masterwork_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Shattered Armaments") { shouldDraw = Settings.DelveWeapon_Shattered_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-                        else if (n == "Amalgamated Armaments") { shouldDraw = Settings.DelveWeapon_Amalgamated_Draw; tint = Settings.DelveWeapon_Tint; size = Settings.DelveWeapon_Size; index = Settings.DelveWeapon_Index; drawText = Settings.DelveWeapon_DrawText; }
-
-                        // Jewellery
-                        else if (n == "Abandoned Jewellery") { shouldDraw = Settings.DelveJewelry_AbandonedJewellery_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Abandoned Amulets") { shouldDraw = Settings.DelveJewelry_AbandonedAmulets_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Abandoned Rings") { shouldDraw = Settings.DelveJewelry_AbandonedRings_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Abandoned Jewels") { shouldDraw = Settings.DelveJewelry_AbandonedJewels_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Twisted Jewellery") { shouldDraw = Settings.DelveJewelry_TwistedJewellery_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Flexible Jewellery") { shouldDraw = Settings.DelveJewelry_Flexible_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Light Jewellery") { shouldDraw = Settings.DelveJewelry_Light_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Astral Jewellery") { shouldDraw = Settings.DelveJewelry_Astral_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Eldritch Jewellery") { shouldDraw = Settings.DelveJewelry_Eldritch_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Triumphant Jewellery") { shouldDraw = Settings.DelveJewelry_Triumphant_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Unusual Jewellery") { shouldDraw = Settings.DelveJewelry_Unusual_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Ritualistic Jewellery") { shouldDraw = Settings.DelveJewelry_Ritualistic_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Superior Jewellery") { shouldDraw = Settings.DelveJewelry_Superior_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Shattered Jewellery") { shouldDraw = Settings.DelveJewelry_Shattered_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Amalgamated Jewellery") { shouldDraw = Settings.DelveJewelry_Amalgamated_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Twisted Jewels") { shouldDraw = Settings.DelveJewelry_TwistedJewels_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-                        else if (n == "Compacted Jewels") { shouldDraw = Settings.DelveJewelry_Compacted_Draw; tint = Settings.DelveJewelry_Tint; size = Settings.DelveJewelry_Size; index = Settings.DelveJewelry_Index; drawText = Settings.DelveJewelry_DrawText; }
-
-                        // Gem
-                        else if (n == "Abandoned Gems") { shouldDraw = Settings.DelveGem_Abandoned_Draw; tint = Settings.DelveGem_Tint; size = Settings.DelveGem_Size; index = Settings.DelveGem_Index; drawText = Settings.DelveGem_DrawText; }
-                        else if (n == "Gemcutter's Gems") { shouldDraw = Settings.DelveGem_Gemcutters_Draw; tint = Settings.DelveGem_Tint; size = Settings.DelveGem_Size; index = Settings.DelveGem_Index; drawText = Settings.DelveGem_DrawText; }
-                        else if (n == "Superior Gems") { shouldDraw = Settings.DelveGem_Superior_Draw; tint = Settings.DelveGem_Tint; size = Settings.DelveGem_Size; index = Settings.DelveGem_Index; drawText = Settings.DelveGem_DrawText; }
-                        else if (n == "Ancient Gems") { shouldDraw = Settings.DelveGem_Ancient_Draw; tint = Settings.DelveGem_Tint; size = Settings.DelveGem_Size; index = Settings.DelveGem_Index; drawText = Settings.DelveGem_DrawText; }
-                        else if (n == "Inscribed Gems") { shouldDraw = Settings.DelveGem_Inscribed_Draw; tint = Settings.DelveGem_Tint; size = Settings.DelveGem_Size; index = Settings.DelveGem_Index; drawText = Settings.DelveGem_DrawText; }
-                        else if (n == "Exceptional Gems") { shouldDraw = Settings.DelveGem_Exceptional_Draw; tint = Settings.DelveGem_Tint; size = Settings.DelveGem_Size; index = Settings.DelveGem_Index; drawText = Settings.DelveGem_DrawText; }
+                        // Unified matching by suffix (reward type)
                         
-                        // Currency
-                        else if (n == "Abandoned Riches") { shouldDraw = Settings.DelveCurrency_AbandonedRiches_Draw; tint = Settings.DelveCurrency_Tint; size = Settings.DelveCurrency_Size; index = Settings.DelveCurrency_Index; drawText = Settings.DelveCurrency_DrawText; }
-                        else if (n == "Pocked Riches") { shouldDraw = Settings.DelveCurrency_Pocked_Draw; tint = Settings.DelveCurrency_Tint; size = Settings.DelveCurrency_Size; index = Settings.DelveCurrency_Index; drawText = Settings.DelveCurrency_DrawText; }
-                        else if (n == "Bloodstained Riches") { shouldDraw = Settings.DelveCurrency_Bloodstained_Draw; tint = Settings.DelveCurrency_Tint; size = Settings.DelveCurrency_Size; index = Settings.DelveCurrency_Index; drawText = Settings.DelveCurrency_DrawText; }
-                        else if (n == "Light Riches") { shouldDraw = Settings.DelveCurrency_Light_Draw; tint = Settings.DelveCurrency_Tint; size = Settings.DelveCurrency_Size; index = Settings.DelveCurrency_Index; drawText = Settings.DelveCurrency_DrawText; }
-                        else if (n == "Glimmering Riches") { shouldDraw = Settings.DelveCurrency_Glimmering_Draw; tint = Settings.DelveCurrency_Tint; size = Settings.DelveCurrency_Size; index = Settings.DelveCurrency_Index; drawText = Settings.DelveCurrency_DrawText; }
-                        else if (n == "Packed Riches") { shouldDraw = Settings.DelveCurrency_Packed_Draw; tint = Settings.DelveCurrency_Tint; size = Settings.DelveCurrency_Size; index = Settings.DelveCurrency_Index; drawText = Settings.DelveCurrency_DrawText; }
-                        else if (n == "Cartographer's Riches") { shouldDraw = Settings.DelveCurrency_Cartographers_Draw; tint = Settings.DelveCurrency_Tint; size = Settings.DelveCurrency_Size; index = Settings.DelveCurrency_Index; drawText = Settings.DelveCurrency_DrawText; }
-                        else if (n == "Shattered Riches") { shouldDraw = Settings.DelveCurrency_Shattered_Draw; tint = Settings.DelveCurrency_Tint; size = Settings.DelveCurrency_Size; index = Settings.DelveCurrency_Index; drawText = Settings.DelveCurrency_DrawText; }
-                        else if (n == "Abandoned Fortune") { shouldDraw = Settings.DelveCurrency_AbandonedFortune_Draw; tint = Settings.DelveCurrency_Tint; size = Settings.DelveCurrency_Size; index = Settings.DelveCurrency_Index; drawText = Settings.DelveCurrency_DrawText; }
-
+                        // Keep Opulence separate based on prompt requests
+                        if (n == "Hidden Opulence" || n == "Concealed Opulence" || n == "Opulent Lockbox") {
+                            shouldDraw = Settings.DelveDynamite_Opulence_Draw;
+                            tint = Settings.DelveDynamite_Opulence_Tint;
+                            size = Settings.DelveDynamite_Opulence_Size;
+                            index = Settings.DelveDynamite_Opulence_Index;
+                            drawText = Settings.DelveDynamite_Opulence_DrawText;
+                        }
+                        // Equipment
+                        else if (n.EndsWith("Armour", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Armour_Draw; tint = Settings.DelveEquipment_Tint; size = Settings.DelveEquipment_Size; index = Settings.DelveEquipment_Index; drawText = Settings.DelveEquipment_DrawText;
+                        }
+                        else if (n.EndsWith("Armaments", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Armaments_Draw; tint = Settings.DelveEquipment_Tint; size = Settings.DelveEquipment_Size; index = Settings.DelveEquipment_Index; drawText = Settings.DelveEquipment_DrawText;
+                        }
+                        else if (n.EndsWith("Jewellery", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Jewellery_Draw; tint = Settings.DelveEquipment_Tint; size = Settings.DelveEquipment_Size; index = Settings.DelveEquipment_Index; drawText = Settings.DelveEquipment_DrawText;
+                        }
+                        else if (n.EndsWith("Amulets", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Amulets_Draw; tint = Settings.DelveEquipment_Tint; size = Settings.DelveEquipment_Size; index = Settings.DelveEquipment_Index; drawText = Settings.DelveEquipment_DrawText;
+                        }
+                        else if (n.EndsWith("Rings", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Rings_Draw; tint = Settings.DelveEquipment_Tint; size = Settings.DelveEquipment_Size; index = Settings.DelveEquipment_Index; drawText = Settings.DelveEquipment_DrawText;
+                        }
+                        else if (n.EndsWith("Jewels", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Jewels_Draw; tint = Settings.DelveEquipment_Tint; size = Settings.DelveEquipment_Size; index = Settings.DelveEquipment_Index; drawText = Settings.DelveEquipment_DrawText;
+                        }
+                        else if (n.EndsWith("Talismans", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Talismans_Draw; tint = Settings.DelveEquipment_Tint; size = Settings.DelveEquipment_Size; index = Settings.DelveEquipment_Index; drawText = Settings.DelveEquipment_DrawText;
+                        }
+                        // Gems
+                        else if (n.EndsWith("Gems", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Gems_Draw; tint = Settings.DelveGem_Tint; size = Settings.DelveGem_Size; index = Settings.DelveGem_Index; drawText = Settings.DelveGem_DrawText;
+                        }
+                        // Currency / Wealth
+                        else if (n.EndsWith("Loot", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Loot_Draw; tint = Settings.DelveWealth_Tint; size = Settings.DelveWealth_Size; index = Settings.DelveWealth_Index; drawText = Settings.DelveWealth_DrawText;
+                        }
+                        else if (n.EndsWith("Treasures", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Treasures_Draw; tint = Settings.DelveWealth_Tint; size = Settings.DelveWealth_Size; index = Settings.DelveWealth_Index; drawText = Settings.DelveWealth_DrawText;
+                        }
+                        else if (n.EndsWith("Wealth", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Wealth_Draw; tint = Settings.DelveWealth_Tint; size = Settings.DelveWealth_Size; index = Settings.DelveWealth_Index; drawText = Settings.DelveWealth_DrawText;
+                        }
+                        else if (n.EndsWith("Riches", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Riches_Draw; tint = Settings.DelveWealth_Tint; size = Settings.DelveWealth_Size; index = Settings.DelveWealth_Index; drawText = Settings.DelveWealth_DrawText;
+                        }
+                        else if (n.EndsWith("Fortune", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Fortune_Draw; tint = Settings.DelveWealth_Tint; size = Settings.DelveWealth_Size; index = Settings.DelveWealth_Index; drawText = Settings.DelveWealth_DrawText;
+                        }
                         // Maps
-                        else if (n == "Abandoned Charts") { shouldDraw = Settings.DelveMap_Abandoned_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText; }
-                        else if (n == "Cartographer's Charts") { shouldDraw = Settings.DelveMap_Cartographers_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText; }
-                        else if (n == "Bloodstained Charts") { shouldDraw = Settings.DelveMap_Bloodstained_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText; }
-                        else if (n == "Strange Charts") { shouldDraw = Settings.DelveMap_Strange_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText; }
-                        else if (n == "Explorer's Charts") { shouldDraw = Settings.DelveMap_Explorers_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText; }
-                        else if (n == "Beautiful Charts") { shouldDraw = Settings.DelveMap_Beautiful_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText; }
-                        else if (n == "Puzzling Charts") { shouldDraw = Settings.DelveMap_Puzzling_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText; }
-                        else if (n == "Maddening Charts") { shouldDraw = Settings.DelveMap_Maddening_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText; }
-                        else if (n == "Remembered Charts") { shouldDraw = Settings.DelveMap_Remembered_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText; }
-
-                        // Special
-                        else if (n == "Grim Armour") { shouldDraw = Settings.DelveSpecial_GrimArmour_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Grim Jewellery") { shouldDraw = Settings.DelveSpecial_GrimJewellery_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Grim Loot") { shouldDraw = Settings.DelveSpecial_GrimLoot_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Grim Treasures") { shouldDraw = Settings.DelveSpecial_GrimTreasures_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Heavy Armour") { shouldDraw = Settings.DelveSpecial_HeavyArmour_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Heavy Jewellery") { shouldDraw = Settings.DelveSpecial_HeavyJewellery_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Heavy Loot") { shouldDraw = Settings.DelveSpecial_HeavyLoot_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Heavy Treasures") { shouldDraw = Settings.DelveSpecial_HeavyTreasures_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Smouldering Armour") { shouldDraw = Settings.DelveSpecial_SmoulderingArmour_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Smouldering Armaments") { shouldDraw = Settings.DelveSpecial_SmoulderingArmaments_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Smouldering Jewellery") { shouldDraw = Settings.DelveSpecial_SmoulderingJewellery_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Smouldering Loot") { shouldDraw = Settings.DelveSpecial_SmoulderingLoot_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Smouldering Treasures") { shouldDraw = Settings.DelveSpecial_SmoulderingTreasures_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Frosty Armour") { shouldDraw = Settings.DelveSpecial_FrostyArmour_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Frosty Armaments") { shouldDraw = Settings.DelveSpecial_FrostyArmaments_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Frosty Jewellery") { shouldDraw = Settings.DelveSpecial_FrostyJewellery_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Frosty Loot") { shouldDraw = Settings.DelveSpecial_FrostyLoot_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Frosty Treasures") { shouldDraw = Settings.DelveSpecial_FrostyTreasures_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Charged Armour") { shouldDraw = Settings.DelveSpecial_ChargedArmour_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Charged Armaments") { shouldDraw = Settings.DelveSpecial_ChargedArmaments_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Charged Jewellery") { shouldDraw = Settings.DelveSpecial_ChargedJewellery_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Charged Loot") { shouldDraw = Settings.DelveSpecial_ChargedLoot_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Charged Treasures") { shouldDraw = Settings.DelveSpecial_ChargedTreasures_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Malignant Armour") { shouldDraw = Settings.DelveSpecial_MalignantArmour_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Malignant Armaments") { shouldDraw = Settings.DelveSpecial_MalignantArmaments_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Malignant Jewellery") { shouldDraw = Settings.DelveSpecial_MalignantJewellery_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Malignant Loot") { shouldDraw = Settings.DelveSpecial_MalignantLoot_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Malignant Treasures") { shouldDraw = Settings.DelveSpecial_MalignantTreasures_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Feral Talismans") { shouldDraw = Settings.DelveSpecial_FeralTalismans_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Feral Armour") { shouldDraw = Settings.DelveSpecial_FeralArmour_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Feral Jewellery") { shouldDraw = Settings.DelveSpecial_FeralJewellery_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Whispering Coffer") { shouldDraw = Settings.DelveSpecial_WhisperingCoffer_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Inspiring Armour") { shouldDraw = Settings.DelveSpecial_InspiringArmour_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Inspiring Jewellery") { shouldDraw = Settings.DelveSpecial_InspiringJewellery_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Inspiring Loot") { shouldDraw = Settings.DelveSpecial_InspiringLoot_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Inspiring Treasures") { shouldDraw = Settings.DelveSpecial_InspiringTreasures_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Gazing Jewellery") { shouldDraw = Settings.DelveSpecial_GazingJewellery_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-                        else if (n == "Prehistoric Riches") { shouldDraw = Settings.DelveSpecial_PrehistoricRiches_Draw; tint = Settings.DelveSpecial_Tint; size = Settings.DelveSpecial_Size; index = Settings.DelveSpecial_Index; drawText = Settings.DelveSpecial_DrawText; }
-
-                        // City Biomes
-                        else if (n == "Bloodstained Loot") { shouldDraw = Settings.DelveCity_BloodstainedLoot_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Handcrafted Antiques") { shouldDraw = Settings.DelveCity_HandcraftedAntiques_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Mythical Crate") { shouldDraw = Settings.DelveCity_MythicalCrate_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Disturbing Loot") { shouldDraw = Settings.DelveCity_DisturbingLoot_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Rattling Coffer") { shouldDraw = Settings.DelveCity_RattlingCoffer_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Abyssal Jewellery") { shouldDraw = Settings.DelveCity_AbyssalJewellery_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Abyssal Treasures") { shouldDraw = Settings.DelveCity_AbyssalTreasures_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Prehistoric Ore") { shouldDraw = Settings.DelveCity_PrehistoricOre_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Prehistoric Fossils") { shouldDraw = Settings.DelveCity_PrehistoricFossils_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Prehistoric Resonators") { shouldDraw = Settings.DelveCity_PrehistoricResonators_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Prehistoric Rings") { shouldDraw = Settings.DelveCity_PrehistoricRings_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Prehistoric Jewels") { shouldDraw = Settings.DelveCity_PrehistoricJewels_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Concealed Opulence") { shouldDraw = Settings.DelveCity_ConcealedOpulence_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Concealed Oddities") { shouldDraw = Settings.DelveCity_ConcealedOddities_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
-                        else if (n == "Concealed Adornments") { shouldDraw = Settings.DelveCity_ConcealedAdornments_Draw; tint = Settings.DelveCity_Tint; size = Settings.DelveCity_Size; index = Settings.DelveCity_Index; drawText = Settings.DelveCity_DrawText; }
+                        else if (n.EndsWith("Charts", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Charts_Draw; tint = Settings.DelveMap_Tint; size = Settings.DelveMap_Size; index = Settings.DelveMap_Index; drawText = Settings.DelveMap_DrawText;
+                        }
+                        // Containers
+                        else if (n.EndsWith("Lockbox", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Lockbox_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
+                        else if (n.EndsWith("Coffer", StringComparison.OrdinalIgnoreCase) || n.EndsWith("Coffers", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Coffer_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
+                        else if (n.EndsWith("Crate", StringComparison.OrdinalIgnoreCase) || n.EndsWith("Crates", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Crate_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
+                        else if (n.EndsWith("Antiques", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Antiques_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
+                        else if (n.EndsWith("Oddities", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Oddities_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
+                        else if (n.EndsWith("Adornments", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Adornments_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
+                        else if (n.EndsWith("Heirlooms", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Heirlooms_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
+                        else if (n.EndsWith("Shadowstitch", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Shadowstitch_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
+                        else if (n.EndsWith("Offering to the Goddess", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Offering_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
+                        else if (n.EndsWith("Ore", StringComparison.OrdinalIgnoreCase)) {
+                            shouldDraw = Settings.Delve_Ore_Draw; tint = Settings.DelveContainers_Tint; size = Settings.DelveContainers_Size; index = Settings.DelveContainers_Index; drawText = Settings.DelveContainers_DrawText;
+                        }
 
                         icon.Draw = shouldDraw;
                         icon.DrawText = drawText;

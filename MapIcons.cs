@@ -331,32 +331,15 @@ public class MapIcons : BaseSettingsPlugin<MapIconsSettings>
 
     }
     private void DrawDelveChestSettings() {
-
         ImGuiUtils.ColorSwatch("Icon Tint ##DelveGeneric", ref Settings.DelveChestGeneric_Tint); ImGui.SameLine();
         IconButton("Generic Delve Chest Icon", "Icon", ref Settings.DelveChestGeneric_Index, Settings.DelveChestGeneric_Tint); ImGui.SameLine();
         IconSizeSliderInt("##DelveGeneric", ref Settings.DelveChestGeneric_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Generic Chests (Lockboxes)");
+        ImGui.Text("Generic Chests");
         ImGui.Indent();
         ImGui.Checkbox("Draw Any Generic (Unmatched) Chests", ref Settings.DelveChestGeneric_Draw);
-        if (ImGui.TreeNode("Generic chests")) {
-            ImGui.Checkbox("Sealed Lockbox", ref Settings.DelveGeneric_Sealed_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Hidden Treasures", ref Settings.DelveGeneric_HiddenTreasures_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Murmuring Lockbox", ref Settings.DelveGeneric_Murmuring_Draw);
-            ImGui.Checkbox("Bloodstained Lockbox", ref Settings.DelveGeneric_Bloodstained_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Opulent Lockbox", ref Settings.DelveGeneric_Opulent_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Encrusted Lockbox", ref Settings.DelveGeneric_Encrusted_Draw);
-            ImGui.Checkbox("Light Lockbox", ref Settings.DelveGeneric_Light_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Enchanted Lockbox", ref Settings.DelveGeneric_Enchanted_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Eldritch Lockbox", ref Settings.DelveGeneric_Eldritch_Draw);
-            ImGui.Checkbox("Astral Lockbox", ref Settings.DelveGeneric_Astral_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Clean Lockbox", ref Settings.DelveGeneric_Clean_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Offering to the Goddess", ref Settings.DelveGeneric_Offering_Draw);
-            ImGui.Checkbox("Treasured Lockbox", ref Settings.DelveGeneric_Treasured_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Hidden Heirlooms", ref Settings.DelveGeneric_HiddenHeirlooms_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Shadowstitch", ref Settings.DelveGeneric_Shadowstitch_Draw);
-            ImGui.TreePop();
-        }
         ImGui.Unindent();
+
+        ImGuiUtils.ColorSwatch("Icon Tint ##DelveAzurite", ref Settings.DelveAzurite_Tint); ImGui.SameLine();
         IconButton("Azurite Node Icon", "Icon", ref Settings.DelveAzurite_Index, Settings.DelveAzurite_Tint); ImGui.SameLine();
         IconSizeSliderInt("##DelveAzurite", ref Settings.DelveAzurite_Size, 0, 32); ImGui.SameLine();
         ImGui.Text("Azurite Nodes");
@@ -371,11 +354,46 @@ public class MapIcons : BaseSettingsPlugin<MapIconsSettings>
         ImGui.Checkbox("Pure Azurite Chest", ref Settings.DelveAzurite_Chest4_Draw);
         ImGui.Unindent();
 
-        ImGuiUtils.Checkbox("##DelveFossil", "Draw Fossil Nodes", ref Settings.DelveChestFossil_Draw); ImGui.SameLine();
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveFossil", ref Settings.DelveChestFossil_Tint); ImGui.SameLine();
+        ImGuiUtils.ColorSwatch("Icon Tint ##DelveChestFossil", ref Settings.DelveChestFossil_Tint); ImGui.SameLine();
         IconButton("Fossil Node Icon", "Icon", ref Settings.DelveChestFossil_Index, Settings.DelveChestFossil_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveFossil", ref Settings.DelveChestFossil_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Fossil Node");
+        IconSizeSliderInt("##DelveChestFossil", ref Settings.DelveChestFossil_Size, 0, 32); ImGui.SameLine();
+        ImGui.Text("Fossils");
+        ImGui.Indent();
+        if (ImGui.TreeNode("Fossil Settings")) {
+            ImGui.Checkbox("Aberrant", ref Settings.DelveFossil_Aberrant_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Aetheric", ref Settings.DelveFossil_Aetheric_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Bloodstained", ref Settings.DelveFossil_Bloodstained_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Bound", ref Settings.DelveFossil_Bound_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Corroded", ref Settings.DelveFossil_Corroded_Draw);
+            
+            ImGui.Checkbox("Dense", ref Settings.DelveFossil_Dense_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Enchanted", ref Settings.DelveFossil_Enchanted_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Encrusted", ref Settings.DelveFossil_Encrusted_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Faceted", ref Settings.DelveFossil_Faceted_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Fractured", ref Settings.DelveFossil_Fractured_Draw);
+            
+            ImGui.Checkbox("Frigid", ref Settings.DelveFossil_Frigid_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Gilded", ref Settings.DelveFossil_Gilded_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Glyphic", ref Settings.DelveFossil_Glyphic_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Hollow", ref Settings.DelveFossil_Hollow_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Jagged", ref Settings.DelveFossil_Jagged_Draw);
+            
+            ImGui.Checkbox("Lucent", ref Settings.DelveFossil_Lucent_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Metallic", ref Settings.DelveFossil_Metallic_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Perfect", ref Settings.DelveFossil_Perfect_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Prismatic", ref Settings.DelveFossil_Prismatic_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Pristine", ref Settings.DelveFossil_Pristine_Draw);
+            
+            ImGui.Checkbox("Sanctified", ref Settings.DelveFossil_Sanctified_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Scorched", ref Settings.DelveFossil_Scorched_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Serrated", ref Settings.DelveFossil_Serrated_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Shuddering", ref Settings.DelveFossil_Shuddering_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Tangled", ref Settings.DelveFossil_Tangled_Draw);
+            
+            ImGui.Checkbox("Generic Fossil (Catch-all)", ref Settings.DelveFossil_Generic_Draw);
+            ImGui.TreePop();
+        }
+        ImGui.Unindent();
 
         ImGuiUtils.ColorSwatch("Icon Tint ##DelveResonator", ref Settings.DelveResonator_Tint); ImGui.SameLine();
         IconButton("Resonator Icon", "Icon", ref Settings.DelveResonator_Index, Settings.DelveResonator_Tint); ImGui.SameLine();
@@ -393,46 +411,70 @@ public class MapIcons : BaseSettingsPlugin<MapIconsSettings>
         ImGui.Indent();
         ImGui.Checkbox("Resonator Trove", ref Settings.DelveResonator_Trove_Draw);
         ImGui.Unindent();
-
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveRoute", ref Settings.DelveRoute_Tint); ImGui.SameLine();
-        IconButton("Route Icon", "Icon", ref Settings.DelveRoute_Index, Settings.DelveRoute_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveRoute", ref Settings.DelveRoute_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Standard Path/Off-Path/Dynamite Variants");
+        
+        ImGuiUtils.ColorSwatch("Icon Tint ##DelveEquipment", ref Settings.DelveEquipment_Tint); ImGui.SameLine();
+        IconButton("Equipment Icon", "Icon", ref Settings.DelveEquipment_Index, Settings.DelveEquipment_Tint); ImGui.SameLine();
+        IconSizeSliderInt("##DelveEquipment", ref Settings.DelveEquipment_Size, 0, 32); ImGui.SameLine();
+        ImGui.Text("Equipment Nodes");
         ImGui.Indent();
-        if (ImGui.TreeNode("Main path")) {
-            ImGui.Checkbox("Forgotten Loot", ref Settings.DelvePath_Loot_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Forgotten Armour", ref Settings.DelvePath_Armour_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Forgotten Armaments", ref Settings.DelvePath_Armaments_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Forgotten Jewellery", ref Settings.DelvePath_Jewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Forgotten Wealth", ref Settings.DelvePath_Wealth_Draw);
-            ImGui.TreePop();
-        }
-        if (ImGui.TreeNode("Side paths")) {
-            ImGui.Checkbox("Lost Loot", ref Settings.DelveOffPath_Loot_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Lost Armour", ref Settings.DelveOffPath_Armour_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Lost Armaments", ref Settings.DelveOffPath_Armaments_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Lost Jewellery", ref Settings.DelveOffPath_Jewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Lost Wealth", ref Settings.DelveOffPath_Wealth_Draw);
-            ImGui.TreePop();
-        }
-        if (ImGui.TreeNode("Behind fractured walls")) {
-            ImGui.Checkbox("Hidden Loot", ref Settings.DelveDynamite_Loot_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Hidden Armour", ref Settings.DelveDynamite_Armour_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Hidden Armaments", ref Settings.DelveDynamite_Armaments_Draw);
-            ImGui.Checkbox("Hidden Jewellery", ref Settings.DelveDynamite_Jewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Hidden Wealth", ref Settings.DelveDynamite_Wealth_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Hidden Riches", ref Settings.DelveDynamite_Riches_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Hidden Opulence", ref Settings.DelveDynamite_Opulence_Draw);
+        ImGui.Checkbox("Armour", ref Settings.Delve_Armour_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Armaments", ref Settings.Delve_Armaments_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Jewellery", ref Settings.Delve_Jewellery_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Amulets", ref Settings.Delve_Amulets_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Rings", ref Settings.Delve_Rings_Draw);
+        ImGui.Checkbox("Jewels", ref Settings.Delve_Jewels_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Talismans", ref Settings.Delve_Talismans_Draw);
+        ImGui.Unindent();
+
+        ImGuiUtils.ColorSwatch("Icon Tint ##DelveGem", ref Settings.DelveGem_Tint); ImGui.SameLine();
+        IconButton("Gem Icon", "Icon", ref Settings.DelveGem_Index, Settings.DelveGem_Tint); ImGui.SameLine();
+        IconSizeSliderInt("##DelveGem", ref Settings.DelveGem_Size, 0, 32); ImGui.SameLine();
+        ImGui.Text("Gems");
+        ImGui.Indent();
+        ImGui.Checkbox("Gems", ref Settings.Delve_Gems_Draw);
+        ImGui.Unindent();
+
+        ImGuiUtils.ColorSwatch("Icon Tint ##DelveWealth", ref Settings.DelveWealth_Tint); ImGui.SameLine();
+        IconButton("Wealth Icon", "Icon", ref Settings.DelveWealth_Index, Settings.DelveWealth_Tint); ImGui.SameLine();
+        IconSizeSliderInt("##DelveWealth", ref Settings.DelveWealth_Size, 0, 32); ImGui.SameLine();
+        ImGui.Text("Wealth / Currency Nodes");
+        ImGui.Indent();
+        ImGui.Checkbox("Loot", ref Settings.Delve_Loot_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Treasures", ref Settings.Delve_Treasures_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Wealth", ref Settings.Delve_Wealth_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Riches", ref Settings.Delve_Riches_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Fortune", ref Settings.Delve_Fortune_Draw);
+        ImGui.Unindent();
+        
+        ImGuiUtils.ColorSwatch("Icon Tint ##DelveMap", ref Settings.DelveMap_Tint); ImGui.SameLine();
+        IconButton("Maps Icon", "Icon", ref Settings.DelveMap_Index, Settings.DelveMap_Tint); ImGui.SameLine();
+        IconSizeSliderInt("##DelveMap", ref Settings.DelveMap_Size, 0, 32); ImGui.SameLine();
+        ImGui.Text("Map / Chart Nodes");
+        ImGui.Indent();
+        ImGui.Checkbox("Charts", ref Settings.Delve_Charts_Draw);
+        ImGui.Unindent();
+
+        ImGuiUtils.ColorSwatch("Icon Tint ##DelveContainers", ref Settings.DelveContainers_Tint); ImGui.SameLine();
+        IconButton("Containers Icon", "Icon", ref Settings.DelveContainers_Index, Settings.DelveContainers_Tint); ImGui.SameLine();
+        IconSizeSliderInt("##DelveContainers", ref Settings.DelveContainers_Size, 0, 32); ImGui.SameLine();
+        ImGui.Text("Lockboxes & Event Containers");
+        ImGui.Indent();
+        if (ImGui.TreeNode("Container Toggles")) {
+            ImGui.Checkbox("Lockbox", ref Settings.Delve_Lockbox_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Coffer", ref Settings.Delve_Coffer_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Crate", ref Settings.Delve_Crate_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Antiques", ref Settings.Delve_Antiques_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Oddities", ref Settings.Delve_Oddities_Draw);
             
-            ImGuiUtils.ColorSwatch("Icon Tint ##HiddenOpulence", ref Settings.DelveDynamite_Opulence_Tint); ImGui.SameLine();
-            IconButton("Hidden Opulence Icon", "Icon", ref Settings.DelveDynamite_Opulence_Index, Settings.DelveDynamite_Opulence_Tint); ImGui.SameLine();
-            IconSizeSliderInt("##HiddenOpulence", ref Settings.DelveDynamite_Opulence_Size, 0, 32); ImGui.SameLine();
-            ImGui.Text("Hidden Opulence Config");
-            
+            ImGui.Checkbox("Adornments", ref Settings.Delve_Adornments_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Heirlooms", ref Settings.Delve_Heirlooms_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Shadowstitch", ref Settings.Delve_Shadowstitch_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Offering to the Goddess", ref Settings.Delve_Offering_Draw); ImGui.SameLine();
+            ImGui.Checkbox("Ore", ref Settings.Delve_Ore_Draw);
             ImGui.TreePop();
         }
         ImGui.Unindent();
-
+        
         ImGuiUtils.ColorSwatch("Icon Tint ##DelveSupplies", ref Settings.DelveSupplies_Tint); ImGui.SameLine();
         IconButton("Mining Supplies Icon", "Icon", ref Settings.DelveSupplies_Index, Settings.DelveSupplies_Tint); ImGui.SameLine();
         IconSizeSliderInt("##DelveSupplies", ref Settings.DelveSupplies_Size, 0, 32); ImGui.SameLine();
@@ -441,209 +483,14 @@ public class MapIcons : BaseSettingsPlugin<MapIconsSettings>
         ImGui.Checkbox("Flare Cache", ref Settings.DelveSupplies_Flare_Draw); ImGui.SameLine();
         ImGui.Checkbox("Large Flare Cache", ref Settings.DelveSupplies_LargeFlare_Draw); ImGui.SameLine();
         ImGui.Checkbox("Dynamite Cache", ref Settings.DelveSupplies_Dynamite_Draw);
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveArmour", ref Settings.DelveArmour_Tint); ImGui.SameLine();
-        IconButton("Armour Nodes Icon", "Icon", ref Settings.DelveArmour_Index, Settings.DelveArmour_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveArmour", ref Settings.DelveArmour_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Armour Nodes");
-        ImGui.Indent();
-        if (ImGui.TreeNode("Armour Variations")) {
-            ImGui.Checkbox("Abandoned Armour", ref Settings.DelveArmour_Abandoned_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Twisted Armour", ref Settings.DelveArmour_Twisted_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Traveller's Armour", ref Settings.DelveArmour_Traveller_Draw);
-            ImGui.Checkbox("Vital Armour", ref Settings.DelveArmour_Vital_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Pocked Armour", ref Settings.DelveArmour_Pocked_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Resistant Armour", ref Settings.DelveArmour_Resistant_Draw);
-            ImGui.Checkbox("Unusual Armour", ref Settings.DelveArmour_Unusual_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Superior Armour", ref Settings.DelveArmour_Superior_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Astral Armour", ref Settings.DelveArmour_Astral_Draw);
-            ImGui.Checkbox("Eldritch Armour", ref Settings.DelveArmour_Eldritch_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Triumphant Armour", ref Settings.DelveArmour_Triumphant_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Intricate Armour", ref Settings.DelveArmour_Intricate_Draw);
-            ImGui.Checkbox("Flexible Armour", ref Settings.DelveArmour_Flexible_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Exceptional Armour", ref Settings.DelveArmour_Exceptional_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Shattered Armour", ref Settings.DelveArmour_Shattered_Draw);
-            ImGui.Checkbox("Amalgamated Armour", ref Settings.DelveArmour_Amalgamated_Draw);
-            ImGui.TreePop();
-        }
         ImGui.Unindent();
 
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveWeapon", ref Settings.DelveWeapon_Tint); ImGui.SameLine();
-        IconButton("Weapon Nodes Icon", "Icon", ref Settings.DelveWeapon_Index, Settings.DelveWeapon_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveWeapon", ref Settings.DelveWeapon_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Weapon Nodes");
+        ImGuiUtils.ColorSwatch("Icon Tint ##HiddenOpulence", ref Settings.DelveDynamite_Opulence_Tint); ImGui.SameLine();
+        IconButton("Hidden Opulence Icon", "Icon", ref Settings.DelveDynamite_Opulence_Index, Settings.DelveDynamite_Opulence_Tint); ImGui.SameLine();
+        IconSizeSliderInt("##HiddenOpulence", ref Settings.DelveDynamite_Opulence_Size, 0, 32); ImGui.SameLine();
+        ImGui.Text("Opulence Chests");
         ImGui.Indent();
-        if (ImGui.TreeNode("Weapon Variations")) {
-            ImGui.Checkbox("Abandoned Armaments", ref Settings.DelveWeapon_Abandoned_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Twisted Armaments", ref Settings.DelveWeapon_Twisted_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Heavy Armaments", ref Settings.DelveWeapon_Heavy_Draw);
-            ImGui.Checkbox("Runed Armaments", ref Settings.DelveWeapon_Runed_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Light Armaments", ref Settings.DelveWeapon_Light_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Superior Armaments", ref Settings.DelveWeapon_Superior_Draw);
-            ImGui.Checkbox("Astral Armaments", ref Settings.DelveWeapon_Astral_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Eldritch Armaments", ref Settings.DelveWeapon_Eldritch_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Triumphant Armaments", ref Settings.DelveWeapon_Triumphant_Draw);
-            ImGui.Checkbox("Honed Armaments", ref Settings.DelveWeapon_Honed_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Hexed Armaments", ref Settings.DelveWeapon_Hexed_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Exceptional Armaments", ref Settings.DelveWeapon_Exceptional_Draw);
-            ImGui.Checkbox("Masterwork Armaments", ref Settings.DelveWeapon_Masterwork_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Shattered Armaments", ref Settings.DelveWeapon_Shattered_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Amalgamated Armaments", ref Settings.DelveWeapon_Amalgamated_Draw);
-            ImGui.TreePop();
-        }
-        ImGui.Unindent();
-
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveJewelry", ref Settings.DelveJewelry_Tint); ImGui.SameLine();
-        IconButton("Jewellery Nodes Icon", "Icon", ref Settings.DelveJewelry_Index, Settings.DelveJewelry_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveJewelry", ref Settings.DelveJewelry_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Jewellery Nodes");
-        ImGui.Indent();
-        if (ImGui.TreeNode("Jewellery Variations")) {
-            ImGui.Checkbox("Abandoned Jewellery", ref Settings.DelveJewelry_AbandonedJewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Abandoned Amulets", ref Settings.DelveJewelry_AbandonedAmulets_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Abandoned Rings", ref Settings.DelveJewelry_AbandonedRings_Draw);
-            ImGui.Checkbox("Abandoned Jewels", ref Settings.DelveJewelry_AbandonedJewels_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Twisted Jewellery", ref Settings.DelveJewelry_TwistedJewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Flexible Jewellery", ref Settings.DelveJewelry_Flexible_Draw);
-            ImGui.Checkbox("Light Jewellery", ref Settings.DelveJewelry_Light_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Astral Jewellery", ref Settings.DelveJewelry_Astral_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Eldritch Jewellery", ref Settings.DelveJewelry_Eldritch_Draw);
-            ImGui.Checkbox("Triumphant Jewellery", ref Settings.DelveJewelry_Triumphant_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Unusual Jewellery", ref Settings.DelveJewelry_Unusual_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Ritualistic Jewellery", ref Settings.DelveJewelry_Ritualistic_Draw);
-            ImGui.Checkbox("Superior Jewellery", ref Settings.DelveJewelry_Superior_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Shattered Jewellery", ref Settings.DelveJewelry_Shattered_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Amalgamated Jewellery", ref Settings.DelveJewelry_Amalgamated_Draw);
-            ImGui.Checkbox("Twisted Jewels", ref Settings.DelveJewelry_TwistedJewels_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Compacted Jewels", ref Settings.DelveJewelry_Compacted_Draw);
-            ImGui.TreePop();
-        }
-        ImGui.Unindent();
-
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveGem", ref Settings.DelveGem_Tint); ImGui.SameLine();
-        IconButton("Gem Nodes Icon", "Icon", ref Settings.DelveGem_Index, Settings.DelveGem_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveGem", ref Settings.DelveGem_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Gem Nodes");
-        ImGui.Indent();
-        if (ImGui.TreeNode("Gem Variations")) {
-            ImGui.Checkbox("Abandoned Gems", ref Settings.DelveGem_Abandoned_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Gemcutter's Gems", ref Settings.DelveGem_Gemcutters_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Superior Gems", ref Settings.DelveGem_Superior_Draw);
-            ImGui.Checkbox("Ancient Gems", ref Settings.DelveGem_Ancient_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Inscribed Gems", ref Settings.DelveGem_Inscribed_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Exceptional Gems", ref Settings.DelveGem_Exceptional_Draw);
-            ImGui.TreePop();
-        }
-        ImGui.Unindent();
-
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveCurrency", ref Settings.DelveCurrency_Tint); ImGui.SameLine();
-        IconButton("Currency Nodes Icon", "Icon", ref Settings.DelveCurrency_Index, Settings.DelveCurrency_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveCurrency", ref Settings.DelveCurrency_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Currency Nodes");
-        ImGui.Indent();
-        if (ImGui.TreeNode("Currency Variations")) {
-            ImGui.Checkbox("Abandoned Riches", ref Settings.DelveCurrency_AbandonedRiches_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Pocked Riches", ref Settings.DelveCurrency_Pocked_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Bloodstained Riches", ref Settings.DelveCurrency_Bloodstained_Draw);
-            ImGui.Checkbox("Light Riches", ref Settings.DelveCurrency_Light_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Glimmering Riches", ref Settings.DelveCurrency_Glimmering_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Packed Riches", ref Settings.DelveCurrency_Packed_Draw);
-            ImGui.Checkbox("Cartographer's Riches", ref Settings.DelveCurrency_Cartographers_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Shattered Riches", ref Settings.DelveCurrency_Shattered_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Abandoned Fortune", ref Settings.DelveCurrency_AbandonedFortune_Draw);
-            ImGui.TreePop();
-        }
-        ImGui.Unindent();
-
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveMap", ref Settings.DelveMap_Tint); ImGui.SameLine();
-        IconButton("Map Nodes Icon", "Icon", ref Settings.DelveMap_Index, Settings.DelveMap_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveMap", ref Settings.DelveMap_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Map Nodes");
-        ImGui.Indent();
-        if (ImGui.TreeNode("Map Variations")) {
-            ImGui.Checkbox("Abandoned Charts", ref Settings.DelveMap_Abandoned_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Cartographer's Charts", ref Settings.DelveMap_Cartographers_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Bloodstained Charts", ref Settings.DelveMap_Bloodstained_Draw);
-            ImGui.Checkbox("Strange Charts", ref Settings.DelveMap_Strange_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Explorer's Charts", ref Settings.DelveMap_Explorers_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Beautiful Charts", ref Settings.DelveMap_Beautiful_Draw);
-            ImGui.Checkbox("Puzzling Charts", ref Settings.DelveMap_Puzzling_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Maddening Charts", ref Settings.DelveMap_Maddening_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Remembered Charts", ref Settings.DelveMap_Remembered_Draw);
-            ImGui.TreePop();
-        }
-        ImGui.Unindent();
-
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveSpecial", ref Settings.DelveSpecial_Tint); ImGui.SameLine();
-        IconButton("Special Nodes Icon", "Icon", ref Settings.DelveSpecial_Index, Settings.DelveSpecial_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveSpecial", ref Settings.DelveSpecial_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Special Nodes");
-        ImGui.Indent();
-        if (ImGui.TreeNode("Special/Elemental Nodes")) {
-            ImGui.Checkbox("Grim Armour", ref Settings.DelveSpecial_GrimArmour_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Grim Jewellery", ref Settings.DelveSpecial_GrimJewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Grim Loot", ref Settings.DelveSpecial_GrimLoot_Draw);
-            ImGui.Checkbox("Grim Treasures", ref Settings.DelveSpecial_GrimTreasures_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Heavy Armour", ref Settings.DelveSpecial_HeavyArmour_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Heavy Jewellery", ref Settings.DelveSpecial_HeavyJewellery_Draw);
-            ImGui.Checkbox("Heavy Loot", ref Settings.DelveSpecial_HeavyLoot_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Heavy Treasures", ref Settings.DelveSpecial_HeavyTreasures_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Smouldering Armour", ref Settings.DelveSpecial_SmoulderingArmour_Draw);
-            ImGui.Checkbox("Smouldering Armaments", ref Settings.DelveSpecial_SmoulderingArmaments_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Smouldering Jewellery", ref Settings.DelveSpecial_SmoulderingJewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Smouldering Loot", ref Settings.DelveSpecial_SmoulderingLoot_Draw);
-            ImGui.Checkbox("Smouldering Treasures", ref Settings.DelveSpecial_SmoulderingTreasures_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Frosty Armour", ref Settings.DelveSpecial_FrostyArmour_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Frosty Armaments", ref Settings.DelveSpecial_FrostyArmaments_Draw);
-            ImGui.Checkbox("Frosty Jewellery", ref Settings.DelveSpecial_FrostyJewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Frosty Loot", ref Settings.DelveSpecial_FrostyLoot_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Frosty Treasures", ref Settings.DelveSpecial_FrostyTreasures_Draw);
-            ImGui.Checkbox("Charged Armour", ref Settings.DelveSpecial_ChargedArmour_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Charged Armaments", ref Settings.DelveSpecial_ChargedArmaments_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Charged Jewellery", ref Settings.DelveSpecial_ChargedJewellery_Draw);
-            ImGui.Checkbox("Charged Loot", ref Settings.DelveSpecial_ChargedLoot_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Charged Treasures", ref Settings.DelveSpecial_ChargedTreasures_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Malignant Armour", ref Settings.DelveSpecial_MalignantArmour_Draw);
-            ImGui.Checkbox("Malignant Armaments", ref Settings.DelveSpecial_MalignantArmaments_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Malignant Jewellery", ref Settings.DelveSpecial_MalignantJewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Malignant Loot", ref Settings.DelveSpecial_MalignantLoot_Draw);
-            ImGui.Checkbox("Malignant Treasures", ref Settings.DelveSpecial_MalignantTreasures_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Feral Talismans", ref Settings.DelveSpecial_FeralTalismans_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Feral Armour", ref Settings.DelveSpecial_FeralArmour_Draw);
-            ImGui.Checkbox("Feral Jewellery", ref Settings.DelveSpecial_FeralJewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Whispering Coffer", ref Settings.DelveSpecial_WhisperingCoffer_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Inspiring Armour", ref Settings.DelveSpecial_InspiringArmour_Draw);
-            ImGui.Checkbox("Inspiring Jewellery", ref Settings.DelveSpecial_InspiringJewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Inspiring Loot", ref Settings.DelveSpecial_InspiringLoot_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Inspiring Treasures", ref Settings.DelveSpecial_InspiringTreasures_Draw);
-            ImGui.Checkbox("Gazing Jewellery", ref Settings.DelveSpecial_GazingJewellery_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Prehistoric Riches", ref Settings.DelveSpecial_PrehistoricRiches_Draw);
-            ImGui.TreePop();
-        }
-        ImGui.Unindent();
-
-        ImGuiUtils.ColorSwatch("Icon Tint ##DelveCity", ref Settings.DelveCity_Tint); ImGui.SameLine();
-        IconButton("City Biomes Icon", "Icon", ref Settings.DelveCity_Index, Settings.DelveCity_Tint); ImGui.SameLine();
-        IconSizeSliderInt("##DelveCity", ref Settings.DelveCity_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("City Biomes");
-        ImGui.Indent();
-        if (ImGui.TreeNode("City Chests")) {
-            ImGui.Checkbox("Bloodstained Loot", ref Settings.DelveCity_BloodstainedLoot_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Handcrafted Antiques", ref Settings.DelveCity_HandcraftedAntiques_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Mythical Crate", ref Settings.DelveCity_MythicalCrate_Draw);
-            ImGui.Checkbox("Disturbing Loot", ref Settings.DelveCity_DisturbingLoot_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Rattling Coffer", ref Settings.DelveCity_RattlingCoffer_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Abyssal Jewellery", ref Settings.DelveCity_AbyssalJewellery_Draw);
-            ImGui.Checkbox("Abyssal Treasures", ref Settings.DelveCity_AbyssalTreasures_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Prehistoric Ore", ref Settings.DelveCity_PrehistoricOre_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Prehistoric Fossils", ref Settings.DelveCity_PrehistoricFossils_Draw);
-            ImGui.Checkbox("Prehistoric Resonators", ref Settings.DelveCity_PrehistoricResonators_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Prehistoric Rings", ref Settings.DelveCity_PrehistoricRings_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Prehistoric Jewels", ref Settings.DelveCity_PrehistoricJewels_Draw);
-            ImGui.Checkbox("Concealed Opulence", ref Settings.DelveCity_ConcealedOpulence_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Concealed Oddities", ref Settings.DelveCity_ConcealedOddities_Draw); ImGui.SameLine();
-            ImGui.Checkbox("Concealed Adornments", ref Settings.DelveCity_ConcealedAdornments_Draw);
-            ImGui.TreePop();
-        }
+        ImGui.Checkbox("Hidden / Concealed / Opulent", ref Settings.DelveDynamite_Opulence_Draw);
         ImGui.Unindent();
     }
     private void DrawStrongboxSettings() {
