@@ -380,10 +380,17 @@ public class MapIcons : BaseSettingsPlugin<MapIconsSettings>
         ImGuiUtils.ColorSwatch("Icon Tint ##DelveResonator", ref Settings.DelveResonator_Tint); ImGui.SameLine();
         IconButton("Resonator Icon", "Icon", ref Settings.DelveResonator_Index, Settings.DelveResonator_Tint); ImGui.SameLine();
         IconSizeSliderInt("##DelveResonator", ref Settings.DelveResonator_Size, 0, 32); ImGui.SameLine();
-        ImGui.Text("Resonators");
+        ImGui.Text("Resonators (Stash/Cache)");
         ImGui.Indent();
         ImGui.Checkbox("Resonator Stash", ref Settings.DelveResonator_Stash_Draw); ImGui.SameLine();
-        ImGui.Checkbox("Resonator Cache", ref Settings.DelveResonator_Cache_Draw); ImGui.SameLine();
+        ImGui.Checkbox("Resonator Cache", ref Settings.DelveResonator_Cache_Draw);
+        ImGui.Unindent();
+
+        ImGuiUtils.ColorSwatch("Icon Tint ##DelveResonatorTrove", ref Settings.DelveResonator_Trove_Tint); ImGui.SameLine();
+        IconButton("Resonator Trove Icon", "Icon", ref Settings.DelveResonator_Trove_Index, Settings.DelveResonator_Trove_Tint); ImGui.SameLine();
+        IconSizeSliderInt("##DelveResonatorTrove", ref Settings.DelveResonator_Trove_Size, 0, 32); ImGui.SameLine();
+        ImGui.Text("Resonator Trove");
+        ImGui.Indent();
         ImGui.Checkbox("Resonator Trove", ref Settings.DelveResonator_Trove_Draw);
         ImGui.Unindent();
 
@@ -416,6 +423,12 @@ public class MapIcons : BaseSettingsPlugin<MapIconsSettings>
             ImGui.Checkbox("Hidden Wealth", ref Settings.DelveDynamite_Wealth_Draw); ImGui.SameLine();
             ImGui.Checkbox("Hidden Riches", ref Settings.DelveDynamite_Riches_Draw); ImGui.SameLine();
             ImGui.Checkbox("Hidden Opulence", ref Settings.DelveDynamite_Opulence_Draw);
+            
+            ImGuiUtils.ColorSwatch("Icon Tint ##HiddenOpulence", ref Settings.DelveDynamite_Opulence_Tint); ImGui.SameLine();
+            IconButton("Hidden Opulence Icon", "Icon", ref Settings.DelveDynamite_Opulence_Index, Settings.DelveDynamite_Opulence_Tint); ImGui.SameLine();
+            IconSizeSliderInt("##HiddenOpulence", ref Settings.DelveDynamite_Opulence_Size, 0, 32); ImGui.SameLine();
+            ImGui.Text("Hidden Opulence Config");
+            
             ImGui.TreePop();
         }
         ImGui.Unindent();

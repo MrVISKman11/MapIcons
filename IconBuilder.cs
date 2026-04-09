@@ -220,16 +220,17 @@ public sealed class IconBuilder
                     icon.IconType = IconTypes.DelveChestResonator;
                     icon.UpdateSettingsAction = () => {
                         bool shouldDraw = false;
+                        bool isTrove = false;
                         if (path.EndsWith("1")) shouldDraw = Settings.DelveResonator_Stash_Draw;
                         else if (path.EndsWith("2")) shouldDraw = Settings.DelveResonator_Cache_Draw;
-                        else if (path.EndsWith("3")) shouldDraw = Settings.DelveResonator_Trove_Draw;
+                        else if (path.EndsWith("3")) { shouldDraw = Settings.DelveResonator_Trove_Draw; isTrove = true; }
                         else shouldDraw = Settings.DelveResonator_Stash_Draw;
 
                         icon.Draw = shouldDraw;
-                        icon.DrawText = Settings.DelveResonator_DrawText;
-                        icon.Size = Settings.DelveResonator_Size;
-                        icon.Index = Settings.DelveResonator_Index;
-                        icon.Tint = Settings.DelveResonator_Tint;
+                        icon.DrawText = isTrove ? Settings.DelveResonator_Trove_DrawText : Settings.DelveResonator_DrawText;
+                        icon.Size = isTrove ? Settings.DelveResonator_Trove_Size : Settings.DelveResonator_Size;
+                        icon.Index = isTrove ? Settings.DelveResonator_Trove_Index : Settings.DelveResonator_Index;
+                        icon.Tint = isTrove ? Settings.DelveResonator_Trove_Tint : Settings.DelveResonator_Tint;
                     };
                 }
                 else if (path.Contains("MiningSupplies", StringComparison.OrdinalIgnoreCase) || path.Contains("Dynamite", StringComparison.OrdinalIgnoreCase)) {
@@ -285,7 +286,7 @@ public sealed class IconBuilder
                         else if (n == "Hidden Jewellery") { shouldDraw = Settings.DelveDynamite_Jewellery_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
                         else if (n == "Hidden Wealth") { shouldDraw = Settings.DelveDynamite_Wealth_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
                         else if (n == "Hidden Riches") { shouldDraw = Settings.DelveDynamite_Riches_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
-                        else if (n == "Hidden Opulence") { shouldDraw = Settings.DelveDynamite_Opulence_Draw; tint = Settings.DelveRoute_Tint; size = Settings.DelveRoute_Size; index = Settings.DelveRoute_Index; drawText = Settings.DelveRoute_DrawText; }
+                        else if (n == "Hidden Opulence") { shouldDraw = Settings.DelveDynamite_Opulence_Draw; tint = Settings.DelveDynamite_Opulence_Tint; size = Settings.DelveDynamite_Opulence_Size; index = Settings.DelveDynamite_Opulence_Index; drawText = Settings.DelveDynamite_Opulence_DrawText; }
 
                         // Generic
                         else if (n == "Sealed Lockbox") shouldDraw = Settings.DelveGeneric_Sealed_Draw;

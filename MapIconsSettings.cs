@@ -1,4 +1,4 @@
-﻿
+
 using ExileCore;
 using ExileCore.Shared.Nodes;
 using ExileCore.Shared.Interfaces;
@@ -323,6 +323,11 @@ public sealed class MapIconsSettings : ISettings {
         public int DelveResonator_Index = 241;
         public Vector4 DelveResonator_Tint = new(1.0f, 0.5f, 0.0f, 1.0f);
 
+        public bool DelveResonator_Trove_DrawText = false;
+        public int DelveResonator_Trove_Size = 32;
+        public int DelveResonator_Trove_Index = 241;
+        public Vector4 DelveResonator_Trove_Tint = new(1.0f, 0.5f, 0.0f, 1.0f);
+
         // Fossils
         public bool DelveChestFossil_Draw = true;
         public bool DelveChestFossil_DrawText = false;
@@ -352,6 +357,11 @@ public sealed class MapIconsSettings : ISettings {
         public bool DelveDynamite_Wealth_Draw = true;
         public bool DelveDynamite_Riches_Draw = true;
         public bool DelveDynamite_Opulence_Draw = true;
+
+        public bool DelveDynamite_Opulence_DrawText = false;
+        public int DelveDynamite_Opulence_Size = 32;
+        public int DelveDynamite_Opulence_Index = 241;
+        public Vector4 DelveDynamite_Opulence_Tint = new(1.0f, 0.8235294f, 0.0f, 1.0f);
 
         // Unified path/offpath/dynamite settings
         public bool DelveRoute_DrawText = false;
