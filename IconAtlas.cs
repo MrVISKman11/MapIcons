@@ -1,4 +1,4 @@
-﻿using ExileCore;
+using ExileCore;
 using ExileCore.Shared;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -14,6 +14,7 @@ public class IconAtlas
     public string Name { get; }
     public string FilePath { get; }
     public IntPtr TextureId { get; }
+    public ImTextureRef TextureRef => new ImTextureRef { TexID = TextureId };
     public Vector2 IconSize { get; }
     public Vector2 AtlasSize { get; }
     public int IconsPerRow { get; }

@@ -250,12 +250,14 @@ public sealed class IconBuilder
                 else if (path.Contains("Resonator", StringComparison.OrdinalIgnoreCase)) {
                     icon.IconType = IconTypes.DelveChestResonator;
                     icon.UpdateSettingsAction = () => {
+                        string n = icon.RenderName ?? "";
+                        bool isTrove = n.Contains("Trove", StringComparison.OrdinalIgnoreCase) || path.EndsWith("3");
+                        bool isCache = n.Contains("Cache", StringComparison.OrdinalIgnoreCase) || path.EndsWith("2");
+
                         bool shouldDraw = false;
-                        bool isTrove = false;
-                        if (path.EndsWith("1")) shouldDraw = Settings.DelveResonator_Stash_Draw;
-                        else if (path.EndsWith("2")) shouldDraw = Settings.DelveResonator_Cache_Draw;
-                        else if (path.EndsWith("3")) { shouldDraw = Settings.DelveResonator_Trove_Draw; isTrove = true; }
-                        else shouldDraw = Settings.DelveResonator_Stash_Draw;
+                        if (isTrove) { shouldDraw = Settings.DelveResonator_Trove_Draw; }
+                        else if (isCache) { shouldDraw = Settings.DelveResonator_Cache_Draw; }
+                        else { shouldDraw = Settings.DelveResonator_Stash_Draw; } // Stash is usually EndsWith("1") or Default
 
                         icon.Draw = shouldDraw;
                         icon.DrawText = isTrove ? Settings.DelveResonator_Trove_DrawText : Settings.DelveResonator_DrawText;
@@ -265,8 +267,22 @@ public sealed class IconBuilder
                     };
                 }
                 else if (path.Contains("MiningSupplies", StringComparison.OrdinalIgnoreCase) || path.Contains("Dynamite", StringComparison.OrdinalIgnoreCase)) {
-                    icon.IconType = IconTypes.DelveChestGeneric;
                     icon.UpdateSettingsAction = () => {
+                        string n = icon.RenderName ?? "";
+                        
+                        // Check if it's an Opulence chest falsely caught due to Dynamite in path
+                        if (n.Contains("Opulence", StringComparison.OrdinalIgnoreCase) || n.Contains("Opulent", StringComparison.OrdinalIgnoreCase)) {
+                            icon.IconType = IconTypes.DelveChestGeneric;
+                            icon.Draw = Settings.DelveDynamite_Opulence_Draw;
+                            icon.DrawText = Settings.DelveDynamite_Opulence_DrawText;
+                            icon.Size = Settings.DelveDynamite_Opulence_Size;
+                            icon.Index = Settings.DelveDynamite_Opulence_Index;
+                            icon.Tint = Settings.DelveDynamite_Opulence_Tint;
+                            return;
+                        }
+
+                        // Otherwise normal supplies
+                        icon.IconType = IconTypes.DelveChestGeneric;
                         bool shouldDraw = false;
                         if (path.Contains("Flares", StringComparison.OrdinalIgnoreCase)) {
                             if (path.EndsWith("2")) shouldDraw = Settings.DelveSupplies_LargeFlare_Draw;
@@ -301,7 +317,7 @@ public sealed class IconBuilder
                         // Unified matching by suffix (reward type)
                         
                         // Keep Opulence separate based on prompt requests
-                        if (n == "Hidden Opulence" || n == "Concealed Opulence" || n == "Opulent Lockbox") {
+                        if (n.Contains("Opulence", StringComparison.OrdinalIgnoreCase) || n.Contains("Opulent", StringComparison.OrdinalIgnoreCase)) {
                             shouldDraw = Settings.DelveDynamite_Opulence_Draw;
                             tint = Settings.DelveDynamite_Opulence_Tint;
                             size = Settings.DelveDynamite_Opulence_Size;

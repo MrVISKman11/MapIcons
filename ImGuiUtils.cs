@@ -1,4 +1,4 @@
-﻿using ImGuiNET;
+using ImGuiNET;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -93,7 +93,7 @@ public static class ImGuiUtils
 
                 ImGui.PushStyleColor(ImGuiCol.Button, iconIndex == selectedIcon ? buttonBgColor : childBgColor); // Set button background color
                 ImGui.SetCursorPos(new Vector2(cursorPos.X + x * iconAtlas.IconSize.X, cursorPos.Y + y * iconAtlas.IconSize.Y));
-                if (ImGui.ImageButton($"##textureID_{y}_{x}", iconAtlas.TextureId, iconAtlas.IconSize, uv0, uv1, Vector4.Zero, tint ?? _defaultTint )) {
+                if (ImGui.ImageButton($"##textureID_{y}_{x}", iconAtlas.TextureRef, iconAtlas.IconSize, uv0, uv1, Vector4.Zero, tint ?? _defaultTint )) {
                     selectedIcon = iconIndex;
                     show = false;
                 }

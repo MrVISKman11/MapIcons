@@ -49,7 +49,7 @@ public class MapIcons : BaseSettingsPlugin<MapIconsSettings>
     //--| Draw Settings |-----------------------------------------------------------------------------------------------
     private void IconButton(string id_name, string tooltip, ref int iconIndex, Vector4 tint) {
         (Vector2 uv0, Vector2 uv1) = _iconAtlas.GetIconUVs(iconIndex);
-        if (ImGui.ImageButton($"##{id_name}", _iconAtlas.TextureId, new Vector2(16, 16), uv0, uv1, new Vector4(0, 0, 0, 0), tint)) {
+        if (ImGui.ImageButton($"##{id_name}", _iconAtlas.TextureRef, new Vector2(16, 16), uv0, uv1, new Vector4(0, 0, 0, 0), tint)) {
             _showIconPicker = true;
             _selectedIconButton = id_name;
         }
